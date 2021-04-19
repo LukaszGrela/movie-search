@@ -28,4 +28,5 @@ export interface IMoviesReducer {
   loading: boolean;
   error?: string;
   results: IMovie[];
+  totalResults: number;
 }
