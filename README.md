@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+# Movie Search
+
+Sample React project to search movies by title. Consumes the [OMDb API](https://www.omdbapi.com/).
+
+## Used features
+
+- redux (with reduxjs-toolkit) and redux-thunk
+- router
+- styled components
+
+## Usage
+
+to run localy you have to create an `.env` file with the `REACT_APP_API_KEY=123xyz` set to your API key.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
