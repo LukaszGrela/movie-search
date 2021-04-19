@@ -1,4 +1,4 @@
-const GATEWAY = `http://img.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
+const GATEWAY = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
 console.log(GATEWAY);
 
 export const searchMovies = (title: string): string => {
