@@ -19,7 +19,7 @@ export interface IMovieSearchResponse {
 export interface IMovie {
   Title: string;
   Year?: string;
-  Type: "movie" | "series" | "episode";
+  Type: "movie" | "series" | "episode" | "game";
   Poster?: string;
   imdbID: string;
 }
