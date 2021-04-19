@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Router, Redirect, Route, Switch } from "react-router-dom";
+import { history } from "../../store";
 import Home from "../Home/Home";
 
 export enum Paths {
@@ -10,7 +11,7 @@ export enum Paths {
 
 const AppRouter: React.FC = (): JSX.Element => {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
         <Route exact path={Paths.HOME}>
           <Home />
@@ -23,7 +24,7 @@ const AppRouter: React.FC = (): JSX.Element => {
         </Route>
         <Redirect to={Paths.HOME} />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 
