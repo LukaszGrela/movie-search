@@ -2,6 +2,7 @@ import React from "react";
 import { Router, Redirect, Route, Switch } from "react-router-dom";
 import { history } from "../../store";
 import Home from "../Home/Home";
+import Results from "../Results/Results";
 
 export enum Paths {
   HOME = "/",
@@ -17,7 +18,7 @@ const AppRouter: React.FC = (): JSX.Element => {
           <Home />
         </Route>
         <Route exact path={Paths.RESULTS}>
-          <p>Implement Movies Path</p>
+          <Results />
         </Route>
         <Route exact path={Paths.MOVIE}>
           <p>Implement Movie detail Path</p>
