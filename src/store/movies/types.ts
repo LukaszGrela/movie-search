@@ -1,11 +1,18 @@
 export interface IMovieErrorResponse {
-  Response: "True" | "False";
+  Response: "False";
   Error: string;
 }
-
+export const guardIMovieErrorResponse = (
+  test: unknown
+): test is IMovieErrorResponse => {
+  return (
+    (test as Object).hasOwnProperty("Response") &&
+    (test as any).Response === "False"
+  );
+};
 export interface IMovieSearchResponse {
   totalResults: number;
-  Response: "True" | "False";
+  Response: "True";
   Search: IMovie[];
 }
 
@@ -19,5 +26,6 @@ export interface IMovie {
 
 export interface IMoviesReducer {
   loading: boolean;
+  error?: string;
   results: IMovie[];
 }
