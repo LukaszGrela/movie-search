@@ -2,7 +2,8 @@ import { History } from "history";
 import { AnyAction, combineReducers, Reducer } from "redux";
 import { IMoviesReducer } from "./movies/types";
 import movies from "./movies/slice";
-export type TAction = AnyAction;
+import { TActionTypes as TSearchActionTypes } from "./movies/actions";
+export type TAction = TSearchActionTypes | AnyAction;
 export type TStateObject = {
   movies: IMoviesReducer;
 };

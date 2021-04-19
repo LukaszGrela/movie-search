@@ -16,3 +16,8 @@ export const searchMovies = createAsyncThunk<
     return response;
   }
 );
+
+export type TActionTypes =
+  | typeof searchMovies.pending
+  | typeof searchMovies.rejected
+  | typeof searchMovies.fulfilled;
