@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IMovie } from "../../store/movies/types";
+import MovieReel from "../icons/MovieReel";
 
 interface IMovieThumbnailProps {
   src: string;
@@ -8,11 +9,30 @@ interface IMovieThumbnailProps {
 const MovieThumbnail = styled.span<IMovieThumbnailProps>`
   display: block;
   width: 4rem;
-  height: 4rem;
-  margin: 1rem;
+  height: 5rem;
+  padding: 1rem;
 
   background-image: ${(props) => `url(${props.src})`};
   background-size: cover;
+`;
+const MovieThumbnailPlaceholder = styled.span`
+  display: block;
+  width: 4rem;
+  height: 5rem;
+  padding: 1rem;
+  background-color: #d7ccc8;
+`;
+
+const MovieListItemWrapper = styled.li`
+  height: 5rem;
+  display: flex;
+  margin: 0.25rem 0;
+`;
+
+const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem
 `;
 
 export interface IProps {
@@ -26,17 +46,23 @@ const MovieListItem: React.FC<IProps> = ({
   className,
 }: IProps): JSX.Element => {
   return (
-    <li className={className}>
-      <span>{data.Title}</span>
-      <span>{data.Type}</span>
-      {data.Year && <span>{data.Year}</span>}
-      {data.Poster && (
+    <MovieListItemWrapper className={className}>
+      {data.Poster && data.Poster.indexOf("http") === 0 ? (
         <MovieThumbnail
           src={data.Poster}
           // alt={`Poster image of the ${movie.Title} movie`}
         />
+      ) : (
+        <MovieThumbnailPlaceholder>
+          <MovieReel />
+        </MovieThumbnailPlaceholder>
       )}
-    </li>
+      <Details>
+        <h2>{data.Title}</h2>
+        {data.Year && <span>({data.Year})</span>}
+        <span>{data.Type}</span>
+      </Details>
+    </MovieListItemWrapper>
   );
 };
 
