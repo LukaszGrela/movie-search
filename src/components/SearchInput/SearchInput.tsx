@@ -7,7 +7,7 @@ const SearchInputWrapper = styled.div`
 const Input = styled.input`
   border: 1px solid #212121;
   border-radius: 0.25rem;
-  padding: 10px;
+  padding: 0.5rem;
   box-sizing: border-box;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -16,6 +16,7 @@ const Input = styled.input`
 
 const SearchButton = styled.button`
   cursor: pointer;
+  padding: 0.5rem;
   border: 1px solid #212121;
   border-radius: 0.25rem;
   border-left: none;
@@ -29,6 +30,10 @@ const SearchButton = styled.button`
 
   svg * {
     fill: #212121;
+  }
+
+  :disabled {
+    cursor: default;
   }
 `;
 
