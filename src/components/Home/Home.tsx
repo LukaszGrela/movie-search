@@ -28,7 +28,7 @@ const SearchWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   h1 {
-    margin-block-start: 0;
+    margin-block-end: 2rem;
   }
   input[type="text"] {
     width: 18rem;
