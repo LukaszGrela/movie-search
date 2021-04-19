@@ -69,6 +69,11 @@ const Oops = styled.div`
 const Back = styled(Link)`
   display: block;
   margin: 1rem 0;
+
+  :first-child {
+    margin-top: 0;
+  }
+
   :hover {
     text-decoration: underline;
   }
@@ -78,6 +83,12 @@ const ResultsCounter = styled.p`
   font-size: 0.875rem;
   color: #757575;
   margin: 1rem 0;
+`;
+
+const ScrollArea = styled.div`
+  height: calc(100vh - 53px - 1rem);
+
+  overflow-y: auto;
 `;
 const Results: React.FC = (): JSX.Element => {
   const { loading, results, error, totalResults } = useSelector<
@@ -111,13 +122,17 @@ const Results: React.FC = (): JSX.Element => {
       )}
       {!loading && !error && (
         <>
-          <Back to={Paths.HOME}>Search for another movie</Back>
-          <ResultsCounter>{`Found ${totalResults} movies, showing first ${results.length}`}</ResultsCounter>
-          <ul>
-            {results.map((movie) => {
-              return <MovieListItem key={movie.imdbID} data={movie} />;
-            })}
-          </ul>
+          <div>
+            <Back to={Paths.HOME}>Search for another movie</Back>
+            <ResultsCounter>{`Found ${totalResults} movies, showing first ${results.length}`}</ResultsCounter>
+          </div>
+          <ScrollArea>
+            <ul>
+              {results.map((movie) => {
+                return <MovieListItem key={movie.imdbID} data={movie} />;
+              })}
+            </ul>
+          </ScrollArea>
         </>
       )}
     </ResultsWrapper>
