@@ -38,8 +38,8 @@ test("Poster works if exists", () => {
 
   const poster = screen.getByTestId("MovieListItem-poster");
 
-  expect(poster).toBeInTheDocument(); //exist
-  expect(poster).toHaveAttribute("src", "http://localhost/some.jpg");
+  expect(poster).toBeInTheDocument(); // exist
+  expect(poster).toHaveAttribute("src", "http://localhost/some.jpg"); // with correct value
 });
 
 test("Poster is not displayed for incorrect url", () => {
@@ -57,5 +57,40 @@ test("Poster is not displayed for incorrect url", () => {
 
   const poster = screen.queryByTestId("MovieListItem-poster");
 
-  expect(poster).not.toBeInTheDocument(); //dont exist
+  expect(poster).not.toBeInTheDocument(); // doesnt exist
+});
+
+test("Year displayed if exists", () => {
+  render(
+    <MovieListItem
+      data={{
+        Title: "test",
+        Type: "episode",
+        imdbID: "12345",
+
+        Year: "1979",
+      }}
+    />
+  );
+
+  const year = screen.getByTestId("MovieListItem-year");
+
+  expect(year).toBeInTheDocument(); // exist
+  expect(year).toHaveTextContent("1979");
+});
+
+test("Year NOT displayed", () => {
+  render(
+    <MovieListItem
+      data={{
+        Title: "test",
+        Type: "episode",
+        imdbID: "12345",
+      }}
+    />
+  );
+
+  const year = screen.queryByTestId("MovieListItem-year");
+
+  expect(year).not.toBeInTheDocument(); // doesnt exist
 });
