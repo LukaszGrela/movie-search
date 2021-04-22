@@ -32,7 +32,7 @@ const MovieListItemWrapper = styled.li`
 const Details = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 0.5rem
+  margin-left: 0.5rem;
 `;
 
 export interface IProps {
@@ -49,6 +49,7 @@ const MovieListItem: React.FC<IProps> = ({
     <MovieListItemWrapper className={className}>
       {data.Poster && data.Poster.indexOf("http") === 0 ? (
         <MovieThumbnail
+          data-testid="MovieListItem-poster"
           src={data.Poster}
           // alt={`Poster image of the ${movie.Title} movie`}
         />
@@ -59,8 +60,10 @@ const MovieListItem: React.FC<IProps> = ({
       )}
       <Details>
         <h2>{data.Title}</h2>
-        {data.Year && <span>({data.Year})</span>}
-        <span>{data.Type}</span>
+        {data.Year && (
+          <span data-testid="MovieListItem-year">({data.Year})</span>
+        )}
+        <span data-testid="MovieListItem-type">{data.Type}</span>
       </Details>
     </MovieListItemWrapper>
   );
