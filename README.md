@@ -2,7 +2,7 @@
 
 Sample React project to search movies by title. Consumes the [OMDb API](https://www.omdbapi.com/).
 
-[Live view](http://movie-search.greladesign.co/)
+[Live view](https://movie-search.greladesign.co/)
 
 ## Used features
 
