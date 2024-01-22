@@ -1,12 +1,12 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { TStateObject } from "../../store/createRootReducer";
-import { IMoviesReducer } from "../../store/movies/types";
-import { Paths } from "../AppRouter/AppRouter";
-import MovieReel from "../icons/MovieReel";
-import MovieListItem from "../MovieListItem/MovieListItem";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { IMoviesReducer } from '../../store/movies/types';
+import { Paths } from '../AppRouter/enums';
+import MovieReel from '../icons/MovieReel';
+import MovieListItem from '../MovieListItem/MovieListItem';
+import { TAppState } from '../../store/types';
 
 const ResultsWrapper = styled.div`
   max-width: 56rem;
@@ -93,7 +93,7 @@ const ScrollArea = styled.div`
 `;
 const Results: React.FC = (): JSX.Element => {
   const { loading, results, error, totalResults } = useSelector<
-    TStateObject,
+    TAppState,
     IMoviesReducer
   >((state) => ({
     loading: state.movies.loading,

@@ -1,11 +1,11 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { history } from "../../store";
-import { searchMovies } from "../../store/movies/actions";
-import { Paths } from "../AppRouter/AppRouter";
-import MovieReel from "../icons/MovieReel";
-import SearchInput from "../SearchInput/SearchInput";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import MovieReel from '../icons/MovieReel';
+import SearchInput from '../SearchInput/SearchInput';
+import { Paths } from '../AppRouter/enums';
+import { searchMovies } from '../../store/movies/actions';
+import { useAppDispatch } from '../../store/hooks';
 
 const StyledHome = styled.div`
   position: relative;
@@ -30,7 +30,7 @@ const SearchWrapper = styled.div`
   h1 {
     margin-block-end: 2rem;
   }
-  input[type="text"] {
+  input[type='text'] {
     width: 18rem;
   }
 `;
@@ -45,9 +45,10 @@ const StyledMovieReel = styled(MovieReel)`
 `;
 
 const Home: React.FC = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState('');
 
   return (
     <StyledHome>
@@ -62,18 +63,18 @@ const Home: React.FC = (): JSX.Element => {
           onSubmit={(value: string): void => {
             setQuery(value);
             dispatch(searchMovies(value));
-            history.push(Paths.RESULTS);
+            navigate(Paths.RESULTS);
           }}
         />
       </SearchWrapper>
 
       <IconAttributtion>
-        Icons made by{" "}
-        <a href="https://www.freepik.com" title="Freepik">
+        Icons made by{' '}
+        <a href='https://www.freepik.com' title='Freepik'>
           Freepik
-        </a>{" "}
-        from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
+        </a>{' '}
+        from{' '}
+        <a href='https://www.flaticon.com/' title='Flaticon'>
           www.flaticon.com
         </a>
       </IconAttributtion>
