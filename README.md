@@ -9,10 +9,17 @@ Sample React project to search movies by title. Consumes the [OMDb API](https://
 - redux (with reduxjs-toolkit) and redux-thunk
 - router
 - styled components
+- PHP API proxy to communicate with OMDBAPI and to hide the API key
 
 ## Usage
 
-to run localy you have to create an `.env` file with the `REACT_APP_API_KEY=123xyz` set to your API key.
+As it relies on PHP to proxy communication, you need some local PHP server to run it, or create an `.env` file with the `REACT_APP_API_KEY=123xyz` set to your OMDb API key and update `src/api.ts` and update the `GATEWAY` to read:
+
+```TypeScript
+const GATEWAY = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
+```
+
+For deployment, on server, you need to put `.env` file with the `REACT_APP_API_KEY=123xyz` set to your OMDb API key next to the `api/movie-search.php`.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

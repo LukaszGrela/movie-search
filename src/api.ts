@@ -1,5 +1,4 @@
-const GATEWAY = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`;
-console.log(GATEWAY);
+const GATEWAY = `api/movie-search.php?`;
 
 export const searchMovies = (title: string): string => {
   return `${GATEWAY}&s=${encodeURIComponent(title)}&r=json`;
