@@ -1,32 +1,34 @@
-import React from "react";
-import { Router, Redirect, Route, Switch } from "react-router-dom";
-import { history } from "../../store";
-import Home from "../Home/Home";
-import Results from "../Results/Results";
+import React from 'react';
+import Home from '../Home/Home';
+import Results from '../Results/Results';
+import { Paths } from './enums';
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
 
-export enum Paths {
-  HOME = "/",
-  RESULTS = "/movies",
-  MOVIE = "/movie/:imdbId",
-}
+const router = createBrowserRouter([
+  {
+    path: Paths.HOME,
+    element: <Home />,
+  },
+  {
+    path: Paths.RESULTS,
+    element: <Results />,
+  },
+  {
+    path: Paths.MOVIE,
+    element: <p>Implement Movie detail Path</p>,
+  },
+  {
+    path: '*',
+    element: <Navigate to={Paths.HOME} />,
+  },
+]);
 
 const AppRouter: React.FC = (): JSX.Element => {
-  return (
-    <Router history={history}>
-      <Switch>
-        <Route exact path={Paths.HOME}>
-          <Home />
-        </Route>
-        <Route exact path={Paths.RESULTS}>
-          <Results />
-        </Route>
-        <Route exact path={Paths.MOVIE}>
-          <p>Implement Movie detail Path</p>
-        </Route>
-        <Redirect to={Paths.HOME} />
-      </Switch>
-    </Router>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default AppRouter;

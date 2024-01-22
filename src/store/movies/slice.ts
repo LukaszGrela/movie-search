@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { searchMovies } from "./actions";
-import { guardIMovieErrorResponse, IMoviesReducer } from "./types";
+import { createSlice } from '@reduxjs/toolkit';
+import { searchMovies } from './actions';
+import { IMoviesReducer } from './types';
 
 const initialState: IMoviesReducer = {
   loading: false,
@@ -8,12 +8,14 @@ const initialState: IMoviesReducer = {
   totalResults: 0,
 };
 
-const movies = createSlice({
-  name: "movies",
+export const SLICE_NAME = 'movies' as const;
+
+export const movies = createSlice({
+  name: SLICE_NAME,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(searchMovies.pending, (state, action) => {
+    builder.addCase(searchMovies.pending, (state) => {
       state.loading = true;
       state.error = undefined;
       state.results = [];
@@ -21,22 +23,15 @@ const movies = createSlice({
     builder.addCase(searchMovies.rejected, (state, action) => {
       state.loading = false;
       state.results = [];
-      state.error = action.error.message;
+      state.error = action.payload?.Error;
       state.totalResults = 0;
     });
     builder.addCase(searchMovies.fulfilled, (state, action) => {
       state.loading = false;
-      if (guardIMovieErrorResponse(action.payload)) {
-        state.results = [];
-        state.error = action.payload.Error;
-        state.totalResults = 0;
-      } else {
-        state.error = undefined;
-        state.results = action.payload.Search;
-        state.totalResults = Number(action.payload.totalResults);
-      }
+
+      state.error = undefined;
+      state.results = action.payload.Search;
+      state.totalResults = Number(action.payload.totalResults);
     });
   },
 });
-
-export default movies.reducer;

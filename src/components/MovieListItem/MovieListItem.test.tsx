@@ -1,96 +1,96 @@
-// czy sie wyrenderuje poprawnie
-// czy wyswietla poprawne dane z podanych danych
-import React from "react";
+import { render, screen } from '@testing-library/react';
+import MovieListItem from './MovieListItem';
 
-import { render, screen } from "@testing-library/react";
-import MovieListItem from "./MovieListItem";
+import { describe, it, expect } from 'vitest';
 
-test("movie list item renders", () => {
-  render(
-    <MovieListItem
-      data={{
-        Title: "test",
-        Type: "episode",
-        imdbID: "12345",
-      }}
-    />
-  );
+describe('MovieListItem test', () => {
+  it('movie list item renders', () => {
+    render(
+      <MovieListItem
+        data={{
+          Title: 'test',
+          Type: 'episode',
+          imdbID: '12345',
+        }}
+      />
+    );
 
-  const title = screen.getByText("test");
-  expect(title).toBeInTheDocument();
+    const title = screen.getByText('test');
+    expect(title).toBeInTheDocument();
 
-  const type = screen.getByText("episode");
-  expect(type).toBeInTheDocument();
-});
+    const type = screen.getByText('episode');
+    expect(type).toBeInTheDocument();
+  });
 
-test("Poster works if exists", () => {
-  render(
-    <MovieListItem
-      data={{
-        Title: "test",
-        Type: "episode",
-        imdbID: "12345",
+  it('Poster works if exists', () => {
+    render(
+      <MovieListItem
+        data={{
+          Title: 'test',
+          Type: 'episode',
+          imdbID: '12345',
 
-        Poster: "http://localhost/some.jpg",
-      }}
-    />
-  );
+          Poster: 'http://localhost/some.jpg',
+        }}
+      />
+    );
 
-  const poster = screen.getByTestId("MovieListItem-poster");
+    const poster = screen.getByTestId('MovieListItem-poster');
 
-  expect(poster).toBeInTheDocument(); // exist
-  expect(poster).toHaveAttribute("src", "http://localhost/some.jpg"); // with correct value
-});
+    expect(poster).toBeInTheDocument(); // exist
+    expect(poster).toHaveAttribute('src', 'http://localhost/some.jpg'); // with correct value
+  });
 
-test("Poster is not displayed for incorrect url", () => {
-  render(
-    <MovieListItem
-      data={{
-        Title: "test",
-        Type: "episode",
-        imdbID: "12345",
+  it('Poster is not displayed for incorrect url', () => {
+    render(
+      <MovieListItem
+        data={{
+          Title: 'test',
+          Type: 'episode',
+          imdbID: '12345',
 
-        Poster: "//localhost/some.jpg",
-      }}
-    />
-  );
+          Poster: '//localhost/some.jpg',
+        }}
+      />
+    );
 
-  const poster = screen.queryByTestId("MovieListItem-poster");
+    const poster = screen.queryByTestId('MovieListItem-poster');
 
-  expect(poster).not.toBeInTheDocument(); // doesnt exist
-});
+    expect(poster).not.toBeInTheDocument(); // doesnt exist
+  });
 
-test("Year displayed if exists", () => {
-  render(
-    <MovieListItem
-      data={{
-        Title: "test",
-        Type: "episode",
-        imdbID: "12345",
+  it('Year displayed if exists', () => {
+    render(
+      <MovieListItem
+        data={{
+          Title: 'test',
+          Type: 'episode',
+          imdbID: '12345',
 
-        Year: "1979",
-      }}
-    />
-  );
+          Year: '1979',
+        }}
+      />
+    );
 
-  const year = screen.getByTestId("MovieListItem-year");
+    const year = screen.getByTestId('MovieListItem-year');
 
-  expect(year).toBeInTheDocument(); // exist
-  expect(year).toHaveTextContent("1979");
-});
+    expect(year).toBeInTheDocument(); // exist
+    expect(year).toHaveTextContent('1979');
+  });
 
-test("Year NOT displayed", () => {
-  render(
-    <MovieListItem
-      data={{
-        Title: "test",
-        Type: "episode",
-        imdbID: "12345",
-      }}
-    />
-  );
+  it('Year NOT displayed', () => {
+    render(
+      <MovieListItem
+        data={{
+          Title: 'test',
+          Type: 'episode',
+          imdbID: '12345',
+        }}
+      />
+    );
 
-  const year = screen.queryByTestId("MovieListItem-year");
+    const year = screen.queryByTestId('MovieListItem-year');
 
-  expect(year).not.toBeInTheDocument(); // doesnt exist
+    expect(year).not.toBeInTheDocument(); // doesnt exist
+  });
 });
